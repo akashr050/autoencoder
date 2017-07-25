@@ -13,7 +13,7 @@ mnist = input_data.read_data_sets("MNIST_data", one_hot = True)
 
 # Hyper parameters
 learning_rate = 0.005
-training_epochs = 1
+training_epochs = 100
 batch_size = 256
 display_step = 1
 examples_to_show = 10
