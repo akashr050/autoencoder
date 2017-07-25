@@ -6,13 +6,14 @@ Author: Akash Rastogi
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+import pickle
 
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data", one_hot = True)
 
 # Hyper parameters
 learning_rate = 0.005
-training_epochs = 100
+training_epochs = 1
 batch_size = 256
 display_step = 1
 examples_to_show = 10
@@ -70,13 +71,19 @@ with tf.Session() as sess:
 
     encode_decode = sess.run( decoder_2, feed_dict={X: mnist.test.images})
 
-    #plotting them
-    f, a = plt.subplots(2, 10, figsize = (10, 2))
-    for i in range(examples_to_show):
-        a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
-        a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)))
-    plt.savefig('./outputs/naive_en/version_2.png')
-    f.show()
-    plt.draw()
+    fileObj = open("./outputs/naive_en/init_data.pickle", "wb")
+    pickle.dump(encode_decode, fileObj)
+    fileObj.close()
 
-    plt.waitforbuttonpress()
+
+
+    #plotting them
+    # f, a = plt.subplots(2, 10, figsize = (10, 2))
+    # for i in range(examples_to_show):
+    #     a[0][i].imshow(np.reshape(mnist.test.images[i], (28, 28)))
+    #     a[1][i].imshow(np.reshape(encode_decode[i], (28, 28)))
+    # plt.savefig('./outputs/naive_en/version_test.png')
+    # f.show()
+    # plt.draw()
+    #
+    # plt.waitforbuttonpress()
